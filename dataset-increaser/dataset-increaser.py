@@ -15,6 +15,9 @@ num_images = len([f for f in os.listdir(path) if os.path.isfile(os.path.join(pat
 for i in range(num_images):
     images.append(Image.open(path + "/" + image_prefix + str(i) + image_suffix))
 
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+
 
 def apply_transformation(image):
     transformation = random.randint(0, 3)
