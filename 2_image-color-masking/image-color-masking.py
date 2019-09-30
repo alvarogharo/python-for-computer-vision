@@ -31,11 +31,9 @@ def convert_and_threshold(image):
     mask = (h >= h_range[0]) & (h < h_range[1]) & \
            (s >= s_range[0]) & (s < s_range[1]) & \
            (v >= v_range[0]) & (v < v_range[1])
-    result[:, :, 0] = result[:, :, 0] * mask
-    result[:, :, 1] = result[:, :, 1] * mask
-    result[:, :, 2] = result[:, :, 2] * mask
+    result = result * mask[:, :, None]
     result = Image.fromarray(result, "HSV")
-    result = Image.blend(result, original_image, alpha=blend_weight)
+    result = Image.blend(result, original_image, blend_weight)
     return result.convert("RGB")
 
 
