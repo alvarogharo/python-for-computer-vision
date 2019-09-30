@@ -35,7 +35,7 @@ def convert_and_threshold(image):
     result[:, :, 1] = result[:, :, 1] * mask
     result[:, :, 2] = result[:, :, 2] * mask
     result = Image.fromarray(result)
-    result = Image.blend(result, original_image, blend_weight)
+    result = Image.blend(result, original_image, alpha=blend_weight)
     return result
 
 
