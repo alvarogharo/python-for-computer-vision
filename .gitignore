@@ -1,4 +1,4 @@
 .idea
 venv
-dataset-increaser/increased_test
-image-color-masking/output
+1_dataset-increaser/increased_test
+2_image-color-masking/output
