@@ -14,8 +14,8 @@ image_counter = 1
 surface_thresholds = range(0, 300, 50)
 complexity_thresholds = range(5)
 
-detection = pd.read_csv(path + "/" + data_1_name + file_format, skiprows=0, na_values="-")
-groundtruth = pd.read_csv(path + "/" + data_2_name + file_format, skiprows=0, na_values="-")
+detection = pd.read_csv(path + "/" + data_1_name + file_format, na_values="-")
+groundtruth = pd.read_csv(path + "/" + data_2_name + file_format, na_values="-")
 
 detection_values = detection.values
 groundtruth_values = groundtruth.values
