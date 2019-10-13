@@ -1,6 +1,6 @@
 from PIL import Image
 from PIL import ImageFilter
-import os.path
+import os
 import random
 
 path = "./test"

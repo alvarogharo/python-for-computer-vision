@@ -3,3 +3,4 @@ venv
 1_dataset-increaser/increased_test
 2_image-color-masking/output
 3_data-plotter/output
+4_data-plotter-jupyter-notebook/output

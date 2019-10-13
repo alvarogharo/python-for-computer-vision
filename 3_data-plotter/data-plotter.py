@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import math
@@ -13,6 +14,9 @@ output_folder = "./output/"
 image_counter = 1
 surface_thresholds = range(0, 300, 50)
 complexity_thresholds = range(5)
+
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
 detection = pd.read_csv(path + "/" + data_1_name + file_format, na_values="-")
 groundtruth = pd.read_csv(path + "/" + data_2_name + file_format, na_values="-")
