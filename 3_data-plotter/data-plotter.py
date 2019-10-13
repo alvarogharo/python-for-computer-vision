@@ -32,10 +32,11 @@ def create_ranges(thresholds):
 
 def count_thresholds(ranges, graphtype="2D"):
     col_index = 1 if graphtype == "2D" else (2 if graphtype == "3D" else 3)
-    a = [detection_values[:, col_index] - groundtruth_values[:, col_index]]
+    a = detection_values[:, col_index] - groundtruth_values[:, col_index]
+    total_values = len(a)
     error_count = np.sum(np.isnan(a))
     a = np.abs(np.where(np.isfinite(a), a, 0))
-    result = [np.count_nonzero((a >= ranges[n][0]) & (a < ranges[n][1])) for n in range(len(ranges))]
+    result = [(np.count_nonzero((a >= ranges[n][0]) & (a < ranges[n][1]))/total_values)*100 for n in range(len(ranges))]
     result.append(error_count)
     print(result)
     return result
@@ -50,6 +51,7 @@ def plot_results(values, labels, tittle="", iscomplexity=False):
     plt.ylabel('Percentage of blueprints')
     plt.bar(range(len(values)), values)
     plt.xticks(range(len(values)), labels)
+    plt.ylim([0, 100])
     plt.savefig(output_folder + image_name + str(image_counter) + image_format)
     plt.show()
 
