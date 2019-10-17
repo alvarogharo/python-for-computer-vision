@@ -4,3 +4,5 @@ venv
 2_image-color-masking/output
 3_data-plotter/output
 4_data-plotter-jupyter-notebook/output
+5_eye-face-detector/output
+6_pedestrian-detector/output
