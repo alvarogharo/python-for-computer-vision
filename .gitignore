@@ -6,3 +6,4 @@ venv
 4_data-plotter-jupyter-notebook/output
 5_eye-face-detector/output
 6_pedestrian-detector/output
+7_color_tracker/output
