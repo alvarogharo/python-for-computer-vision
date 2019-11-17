@@ -1,26 +1,21 @@
-import os
 import argparse
 import cv2
-import numpy as np
+
 
 faceCascadePath = "./classifiers/haarcascade_frontalface_default.xml"
 eyeCascadePath = "./classifiers/haarcascade_eye.xml"
-output_folder = "./output/"
-
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video", required = True, help = "Path to where the video file resides")
+ap.add_argument("-o", "--out", required = True, help = "Path to output the results")
 args = vars(ap.parse_args())
 fourcc = cv2.VideoWriter_fourcc("X", "V", "I", "D")
 
 
 path = args["video"]
-name = path.split("/")
-name = name[len(name)-1].split(".")[0]
+output_folder = args["out"]
 
-out = cv2.VideoWriter(output_folder + name + ".avi", fourcc, 24.0, (640, 266))
+out = cv2.VideoWriter(output_folder, fourcc, 24.0, (640, 266))
 
 cap = cv2.VideoCapture(path)
 while cap.isOpened():

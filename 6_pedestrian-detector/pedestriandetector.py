@@ -1,6 +1,7 @@
 import os
 import argparse
 import cv2
+import numpy as np
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--images", required = True, help = "Path to where the images resides")
@@ -10,26 +11,30 @@ args = vars(ap.parse_args())
 path = args["images"]
 output_folder = args["out"]
 
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
-
 imagesPaths = os.listdir(path)
 imagesPaths.sort()
 
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
+fourcc = cv2.VideoWriter_fourcc("X", "V", "I", "D")
+image_size = np.shape(cv2.imread(path + "/" + imagesPaths[0]))[0:2]
 
+out = cv2.VideoWriter(output_folder, fourcc, 24.0, (image_size[0], image_size[1]))
 count = 0
 for imagePath in imagesPaths:
     image = cv2.imread(path + "/" + imagePath)
-
+    cv2.imshow("image", image)
     rects, weights = hog.detectMultiScale(image, winStride=(8, 8), padding=(32, 32), scale=1.05)
 
     for r in rects:
         cv2.rectangle(image, (r[0], r[1]), (r[0]+r[2], r[1]+r[3]), (0, 255, 0), 3)
 
-    cv2.imwrite(output_folder + "/" + imagePath, image)
+    #cv2.imwrite(output_folder + "/" + imagePath, image)
+    cv2.imshow("image", image)
+    out.write(image)
     count += 1
-    print(str(round((count/len(imagesPaths))*100), 2) + "%")
+    print(str(round((count/len(imagesPaths))*100, 2)) + "%")
 
+out.release()
+cv2.destroyAllWindows()
